@@ -27,7 +27,7 @@ function Covidfulldetails() {
   useEffect(() => {
     setInterval(() => {
       GetCovidData();
-    }, 1000);
+    }, 10000);
   }, [])
   
   const GetCovidData = async () => {

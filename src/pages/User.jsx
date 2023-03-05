@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../components/Header'
-import back from '../assets/back-icon.png'
 import { useNavigate} from "react-router-dom"
 import Breadcrumbs from '../components/Breadcrumbs'
 import axios from 'axios'
@@ -61,39 +60,25 @@ function User({users}) {
                  <th>Email</th>
              </tr>
              <tbody>
-                {
-                    allUsers && allUsers?
-                    allUsers.map((user) => {
+                {allUsers?.map((user) => {
                         return <tr>
-                                <td>{user.user_id}</td>
+                                <td>{user?.user_id ?? 'Not verified'}</td>
                                 <td className='nam'onClick={userdata}>{
-                                    user.information === undefined?
-                                    "Not verified"
-                                    :
-                                    user.information.firstname
+                                    user?.information?.firstname ?? 'Not verified'
                                 }
                                 <span> </span>
                                 {
-                                    user.information === undefined?
-                                    null
-                                    :
-                                    user.information.lastname
+                                    user?.information?.lastname ?? 'Not verified'
                                 }</td>
                                 <td>
                                     {
-                                    user.information === undefined?
-                                    null
-                                    :
-                                    user.information.mobile_number
+                                    user?.information?.mobile_number ?? 'Not verified'
                                     }
                                 </td>
-                                <td>{user.userType}</td>
-                                <td>{user.email}</td>
+                                <td>{user?.userType ?? 'Not verified'}</td>
+                                <td>{user?.email ?? 'Not verified'}</td>
                             </tr>
-                    })
-                    :
-                    null
-                }
+                  })}
                 
              </tbody>
          </table>

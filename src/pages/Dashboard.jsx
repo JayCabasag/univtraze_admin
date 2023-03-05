@@ -26,12 +26,10 @@ function Dashboard() {
   const [allCommunicableDisease, setAllCommunicableDisease] = useState([])
   const [allEmergencyReports, setAllEmergencyReports] = useState([])
 
-  const [totalActiveNotifications, setTotalActiveNotifications] = useState(0)
-
   useEffect(() => {
     setInterval(() => {
       GetCovidData();
-    }, 1000);
+    }, 10000);
   }, [])
 
 
@@ -101,9 +99,6 @@ function Dashboard() {
       navigate('/admin/communicable-disease')
     }
 
-    const fulldetails = () => {
-      navigate('/admin/covidfulldetails')
-    }
 
     const emergency = () => {
       navigate('/admin/emergencyreport')
