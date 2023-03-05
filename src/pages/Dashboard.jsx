@@ -11,6 +11,7 @@ import axios from 'axios'
 import CountUp from 'react-countup';
 import Zoom from 'react-reveal-effects/Zoom';
 import Wave from 'react-wavify'
+import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig'
 
 
 
@@ -61,7 +62,7 @@ function Dashboard() {
 
     await axios
       .get(
-        'https://univtraze.herokuapp.com/api/user/getAllUsers',
+        `${CURRENT_SERVER_DOMAIN}/user/getAllUsers`,
         {
           headers: headers,
         }
@@ -71,7 +72,7 @@ function Dashboard() {
     
     await axios
       .get(
-        'https://univtraze.herokuapp.com/api/communicable_disease/getAllCommunicableDiseaseReported',
+        `${CURRENT_SERVER_DOMAIN}/communicable_disease/getAllCommunicableDiseaseReported`,
         {
           headers: headers,
         }
@@ -81,7 +82,7 @@ function Dashboard() {
 
     await axios
     .get(
-      'https://univtraze.herokuapp.com/api/covid_cases/getAllEmergencyReported',
+      `${CURRENT_SERVER_DOMAIN}/covid_cases/getAllEmergencyReported`,
       {
         headers: headers,
       }

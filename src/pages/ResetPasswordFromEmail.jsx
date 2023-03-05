@@ -6,6 +6,7 @@ import Button from '../components/Button';
 import axios from 'axios';
 import Spinner from 'react-loading-spin';
 import validator from 'validator';
+import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig';
 
 const ResetPasswordFromEmail = () => {
 
@@ -80,7 +81,7 @@ const ResetPasswordFromEmail = () => {
       setError(false)
       setIsLoading(true)
 
-		  axios.post('https://univtraze.herokuapp.com/api/admin/updateAdminPassword', data, {
+		  axios.post(`${CURRENT_SERVER_DOMAIN}/admin/updateAdminPassword`, data, {
 			  headers: headers
 			}).then(resp => {
           if(resp.data.success === false){

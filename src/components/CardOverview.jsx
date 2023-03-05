@@ -3,10 +3,9 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 import moment from 'moment'
+import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig'
 
 function CardOverview({userData: {userId, caseId, userType}}) {
-
-  const [victimName, setVictimName] = useState('Jay Cabasag')
   const [dateCaseConfirmed, setDateCaseConfirmed] = useState('10-16-199')
   const [communicableDiseaseData, setCommunicableDiseaseData] = useState([])
   const [userData, setUserData] = useState([])
@@ -42,7 +41,7 @@ function CardOverview({userData: {userId, caseId, userType}}) {
 			'Authorization': `Bearer ${token}`
 		  }
 
-		  axios.post(`https://univtraze.herokuapp.com/api/user/${currentUserType}`, data, {
+		  axios.post(`${CURRENT_SERVER_DOMAIN}/user/${currentUserType}`, data, {
 			  headers: headers
 			}).then(resp => {
                 
@@ -72,7 +71,7 @@ function CardOverview({userData: {userId, caseId, userType}}) {
 			'Authorization': `Bearer ${token}`
 		  }
 
-		  axios.post('https://univtraze.herokuapp.com/api/communicable_disease/getCommunicableDiseaseById', data, {
+		  axios.post(`${CURRENT_SERVER_DOMAIN}/communicable_disease/getCommunicableDiseaseById`, data, {
 			  headers: headers
 			}).then(resp => {
                 
@@ -111,7 +110,7 @@ function CardOverview({userData: {userId, caseId, userType}}) {
         'Authorization': `Bearer ${token}`
       }
 
-      await axios.post('https://univtraze.herokuapp.com/api/victims/getFirstDegreeVictims', data, {
+      await axios.post(`${CURRENT_SERVER_DOMAIN}/victims/getFirstDegreeVictims`, data, {
           headers: headers
         }).then(resp => {
             
@@ -157,7 +156,7 @@ function CardOverview({userData: {userId, caseId, userType}}) {
         'Authorization': `Bearer ${token}`
       }
     
-      await axios.post('https://univtraze.herokuapp.com/api/victims/getSecondDegreeVictims', data, {
+      await axios.post(`${CURRENT_SERVER_DOMAIN}//victims/getSecondDegreeVictims`, data, {
           headers: headers
         }).then(resp => {
             
@@ -197,7 +196,7 @@ function CardOverview({userData: {userId, caseId, userType}}) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       }
-      await axios.post('https://univtraze.herokuapp.com/api/victims/getThirdDegreeVictims', data, {
+      await axios.post(`${CURRENT_SERVER_DOMAIN}//victims/getThirdDegreeVictims`, data, {
         headers: headers
       }).then(resp => {
           
@@ -229,7 +228,7 @@ function CardOverview({userData: {userId, caseId, userType}}) {
             'Authorization': `Bearer ${token}`
         }
 
-        await axios.post('https://univtraze.herokuapp.com/api/user/getUserDetailsByIds', {id_lists}, {
+        await axios.post(`${CURRENT_SERVER_DOMAIN}/api/user/getUserDetailsByIds`, {id_lists}, {
             headers: headers
           }).then(resp => {
               
@@ -258,7 +257,7 @@ function CardOverview({userData: {userId, caseId, userType}}) {
             'Authorization': `Bearer ${token}`
         }
 
-        await axios.post('https://univtraze.herokuapp.com/api/user/getUserDetailsByIds', {id_lists}, {
+        await axios.post(`${CURRENT_SERVER_DOMAIN}//user/getUserDetailsByIds`, {id_lists}, {
             headers: headers
         }).then(resp => {
             
@@ -287,7 +286,7 @@ function CardOverview({userData: {userId, caseId, userType}}) {
             'Authorization': `Bearer ${token}`
         }
 
-        await axios.post('https://univtraze.herokuapp.com/api/user/getUserDetailsByIds', {id_lists}, {
+        await axios.post(`${CURRENT_SERVER_DOMAIN}/user/getUserDetailsByIds`, {id_lists}, {
             headers: headers
         }).then(resp => {
             

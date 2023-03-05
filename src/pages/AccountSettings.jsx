@@ -1,13 +1,12 @@
 import React, {useState} from 'react'
 import Breadcrumbs from '../components/Breadcrumbs'
 import Header from '../components/Header'
-import {useNavigate, Link} from 'react-router-dom'
-import {QRCodeSVG} from 'qrcode.react';
-import { Base64, decode } from 'js-base64';
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import validator from 'validator';
 import { useEffect } from 'react';
 import jwtDecode from 'jwt-decode';
+import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig';
 
 
 const AccountSettings = () => {
@@ -28,10 +27,6 @@ const AccountSettings = () => {
     const [success, setSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState('')
     const [isLoading, setIsLoading] = useState(false)
-
-
-    // Clinic admin credentials previewer variables
-    const [showPreviewer, setShowPreviewer] = useState(false)
 
     useEffect(() => {
       const decodedToken = jwtDecode(localStorage.getItem('token'))
@@ -118,7 +113,7 @@ const AccountSettings = () => {
                 setError(false)
                 setIsLoading(true)
 
-                await axios.post('https://univtraze.herokuapp.com/api/admin/updateAdminCredentials', data, {
+                await axios.post(`${CURRENT_SERVER_DOMAIN}/admin/updateAdminCredentials`, data, {
             		  headers: headers
             		})
             		.then((response) => {
@@ -207,7 +202,7 @@ const AccountSettings = () => {
                     {
                         success?
                         <>
-                        <img src={require("../assets/verified_icon.gif")} width="200"/>
+                        <img src={require("../assets/verified_icon.gif")} width="200" alt='verified-account'/>
                         <p style={{fontWeight: 'bold', fontSize: '20px'}}>Password updated successfully</p>
                         </>
                         :

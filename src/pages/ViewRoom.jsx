@@ -6,6 +6,7 @@ import QRCode from 'qrcode.react';
 import { Base64 } from 'js-base64';
 import axios from 'axios';
 import { HiSearch } from 'react-icons/hi';
+import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig';
 
 function ViewRoom() {
   const [allRooms, setAllRooms] = useState([]);
@@ -23,7 +24,7 @@ function ViewRoom() {
     };
 
     await axios
-      .get('http://univtraze.herokuapp.com/api/rooms/allRooms', {
+      .get(`${CURRENT_SERVER_DOMAIN}/rooms/allRooms`, {
         headers: headers,
       })
       .then((response) => {
@@ -111,7 +112,7 @@ function ViewRoom() {
     };
 
     await axios
-      .post('https://univtraze.herokuapp.com/api/rooms/searchRoom', data, {
+      .post(`${CURRENT_SERVER_DOMAIN}/rooms/searchRoom`, data, {
         headers: headers,
       })
       .then((response) => {

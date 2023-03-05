@@ -5,6 +5,7 @@ import logoDark from '../assets/logo-dark.png';
 import Button from '../components/Button';
 import axios from 'axios';
 import Spinner from 'react-loading-spin';
+import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig';
 
 function Login() {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ function Login() {
       password: pwd,
     };
     await axios
-      .post('http://univtraze.herokuapp.com/api/admin/loginAdmin', data)
+      .post(`${CURRENT_SERVER_DOMAIN}/admin/loginAdmin`, data)
       .then((res) => {
         if (res.data.success === 1) {
           localStorage.setItem('token', res.data.token);

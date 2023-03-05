@@ -4,6 +4,7 @@ import back from '../assets/back-icon.png'
 import { useNavigate} from "react-router-dom"
 import Breadcrumbs from '../components/Breadcrumbs'
 import axios from 'axios'
+import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig'
 
 
 function User({users}) {
@@ -34,7 +35,7 @@ function User({users}) {
         
         await axios
           .get(
-            'https://univtraze.herokuapp.com/api/user/getAllUsers',
+            `${CURRENT_SERVER_DOMAIN}/user/getAllUsers`,
             {
               headers: headers,
             }

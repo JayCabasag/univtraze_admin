@@ -7,6 +7,7 @@ import Datepicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import axios from 'axios';
+import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig';
 
 function Emergencyreport() {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ function Emergencyreport() {
 
     await axios
       .post(
-        'https://univtraze.herokuapp.com/api/covid_cases/searchEmergencyReportsViaDate',
+        `${CURRENT_SERVER_DOMAIN}/covid_cases/searchEmergencyReportsViaDate`,
         data,
         {
           headers: headers,
@@ -88,7 +89,7 @@ function Emergencyreport() {
 
     await axios
       .post(
-        'https://univtraze.herokuapp.com/api/covid_cases/searchEmergencyReportsViaDate',
+        `${CURRENT_SERVER_DOMAIN}/covid_cases/searchEmergencyReportsViaDate`,
         data,
         {
           headers: headers,

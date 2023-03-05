@@ -6,6 +6,7 @@ import { useNavigate} from "react-router-dom"
 import next from '../assets/next-icon.png';
 import {covidData} from "../data/covidReportData.js";
 import axios from 'axios'
+import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig'
 
 
 function Covidreport() {
@@ -50,7 +51,7 @@ function Covidreport() {
 			'Authorization': `Bearer ${token}`
 		  }
 
-		  axios.post('https://univtraze.herokuapp.com/api/mailer/notifyUserForCaseReported', data, {
+		  axios.post(`${CURRENT_SERVER_DOMAIN}/mailer/notifyUserForCaseReported`, data, {
 			  headers: headers
 			}).then(resp => {
             if(resp.data.success === 1){
@@ -84,7 +85,7 @@ function Covidreport() {
 			'Authorization': `Bearer ${token}`
 		  }
 
-		  axios.post('https://univtraze.herokuapp.com/api/rooms/userVisitedRooms', data, {
+		  axios.post(`${CURRENT_SERVER_DOMAIN}/api/rooms/userVisitedRooms`, data, {
 			  headers: headers
 			}).then(resp => {
             
@@ -109,7 +110,7 @@ function Covidreport() {
     
         await axios
           .get(
-            'https://univtraze.herokuapp.com/api/communicable_disease/getAllCommunicableDiseaseReported',
+            `${CURRENT_SERVER_DOMAIN}/communicable_disease/getAllCommunicableDiseaseReported`,
             {
               headers: headers,
             }

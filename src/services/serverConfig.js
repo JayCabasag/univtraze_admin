@@ -1,0 +1,1 @@
+export const CURRENT_SERVER_DOMAIN = 'https://univtraze-web-api-v1.onrender.com/api'

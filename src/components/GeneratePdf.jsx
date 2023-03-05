@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import moment from 'moment'
 import jsPDF from 'jspdf'
 import axios from 'axios'
+import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig'
 
 const GeneratePdf = ({closePreviewer, props: {roomId, roomNumber, buildingName}}) => {
 
@@ -22,7 +23,7 @@ const GeneratePdf = ({closePreviewer, props: {roomId, roomNumber, buildingName}}
             'Authorization': `Bearer ${token}`
         }
   
-        await axios.post('https://univtraze.herokuapp.com/api/rooms/searchUsersByRoomId', {room_id}, {
+        await axios.post(`${CURRENT_SERVER_DOMAIN}/rooms/searchUsersByRoomId`, {room_id}, {
             headers: headers
           }).then(resp => {
               
@@ -76,7 +77,7 @@ const GeneratePdf = ({closePreviewer, props: {roomId, roomNumber, buildingName}}
                         userVisitedLists.map((data) => {
     
                             if(data.information === 'User not found'){
-                                return
+                                return <p>User not found...</p>
                             }
     
                             if(data.information.data === 'Not verified'){

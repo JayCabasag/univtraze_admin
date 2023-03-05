@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom'
 import {QRCodeSVG} from 'qrcode.react';
 import { Base64 } from 'js-base64';
 import axios from 'axios'
+import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig';
 
 
 function AddRoom() {
@@ -83,7 +84,7 @@ function AddRoom() {
 		  }
 		
 
-		  axios.post('https://univtraze.herokuapp.com/api/rooms/addRoom', data, {
+		  axios.post(`${CURRENT_SERVER_DOMAIN}/rooms/addRoom`, data, {
 			  headers: headers
 			})
 			.then((response) => {

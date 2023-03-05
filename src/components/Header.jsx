@@ -5,6 +5,7 @@ import notification from '../assets/notification-bell.png'
 import menuIcon from "../assets/menu.png"
 import Menu from "./menu"
 import axios from 'axios'
+import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig'
 
 
 
@@ -32,7 +33,7 @@ const Header = () => {
 
     await axios
       .get(
-        'https://univtraze.herokuapp.com/api/notifications/getTotalActiveAdminNotifications',
+        `${CURRENT_SERVER_DOMAIN}/notifications/getTotalActiveAdminNotifications`,
         {
           headers: headers,
         }

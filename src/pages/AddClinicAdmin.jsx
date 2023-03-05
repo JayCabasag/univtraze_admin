@@ -6,6 +6,7 @@ import {QRCodeSVG} from 'qrcode.react';
 import { Base64 } from 'js-base64';
 import axios from 'axios'
 import validator from 'validator';
+import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig';
 
 
 const AddClinicAdmin = () => {
@@ -88,7 +89,7 @@ const AddClinicAdmin = () => {
         setError(false)
         setIsLoading(true)
 
-        await axios.post('https://univtraze.herokuapp.com/api/clinic/createClinicAdmin', data, {
+        await axios.post(`${CURRENT_SERVER_DOMAIN}//clinic/createClinicAdmin`, data, {
 			  headers: headers
 			})
 			.then((response) => {

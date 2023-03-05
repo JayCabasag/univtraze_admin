@@ -5,6 +5,7 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import { useNavigate} from "react-router-dom"
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig'
 
 
 const Attendance = () => {
@@ -27,7 +28,7 @@ const Attendance = () => {
 
         await axios
         .get(
-            'https://univtraze.herokuapp.com/api/rooms/allRooms',
+            `${CURRENT_SERVER_DOMAIN}/rooms/allRooms`,
             {
             headers: headers,
             }

@@ -5,6 +5,7 @@ import { useNavigate} from "react-router-dom"
 import Breadcrumbs from '../components/Breadcrumbs'
 import axios from 'axios'
 import moment from 'moment'
+import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig'
 
 
 function Notifications() {
@@ -37,7 +38,7 @@ function Notifications() {
         }
 
 
-        axios.post('https://univtraze.herokuapp.com/api/notifications/getAdminNotifications', data, {
+        axios.post(`${CURRENT_SERVER_DOMAIN}/notifications/getAdminNotifications`, data, {
           headers: headers
         }).then(resp => {
               setNotificationLists(resp.data.data)
@@ -86,7 +87,7 @@ function Notifications() {
         }
 
 
-        axios.post('https://univtraze.herokuapp.com/api/notifications/updateAdminNotificationStatus', data, {
+        axios.post(`${CURRENT_SERVER_DOMAIN}/notifications/updateAdminNotificationStatus`, data, {
           headers: headers
         }).then(resp => {
               if(resp.data.success === 1){
@@ -112,7 +113,7 @@ function Notifications() {
         }
 
 
-        axios.post('https://univtraze.herokuapp.com/api/notifications/updateAdminNotificationStatus', data, {
+        axios.post(`${CURRENT_SERVER_DOMAIN}/notifications/updateAdminNotificationStatus`, data, {
           headers: headers
         }).then(resp => {
               if(resp.data.success === 1){
@@ -137,7 +138,7 @@ function Notifications() {
      }
 
 
-     axios.post('https://univtraze.herokuapp.com/api/notifications/updateAdminNotificationStatus', data, {
+     axios.post(`${CURRENT_SERVER_DOMAIN}/notifications/updateAdminNotificationStatus`, data, {
        headers: headers
      }).then(resp => {
            if(resp.data.success === 1){

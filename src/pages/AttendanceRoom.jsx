@@ -6,6 +6,7 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import axios from 'axios'
 import { jsPDF } from "jspdf";
 import GeneratePdf from '../components/GeneratePdf'
+import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig'
 
 const AttendanceRoom = () => {
     
@@ -37,7 +38,7 @@ const AttendanceRoom = () => {
           'Authorization': `Bearer ${token}`
       }
 
-      await axios.post('https://univtraze.herokuapp.com/api/rooms/searchUsersByRoomId', {room_id}, {
+      await axios.post(`${CURRENT_SERVER_DOMAIN}/rooms/searchUsersByRoomId`, {room_id}, {
           headers: headers
         }).then(resp => {
             
