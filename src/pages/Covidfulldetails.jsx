@@ -10,7 +10,6 @@ import back from '../assets/back-icon.png'
 import { useNavigate} from "react-router-dom"
 import axios from 'axios'
 import CountUp from 'react-countup';
-import Zoom from 'react-reveal-effects/Zoom';
 
 function Covidfulldetails() {
 
@@ -61,7 +60,6 @@ function Covidfulldetails() {
         <p className="covid-local">Covid Local Full Report</p>
         
         <div className="card-container">
-          <Zoom>
             <Card  label="Local Cases" data=  {
                   whileCounting === true ?
                   <CountUp
@@ -114,7 +112,6 @@ function Covidfulldetails() {
                   todayDeaths.toLocaleString()
                 }
                  design="secondary-cards card-4" icon={died}/>
-                 </Zoom>
             <div className="analytics">
               <p className="covid-update">Others</p>
               <div className="covid-details">

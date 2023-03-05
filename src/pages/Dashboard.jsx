@@ -9,7 +9,6 @@ import note from '../assets/notes_icon.png'
 import { useNavigate} from "react-router-dom"
 import axios from 'axios'
 import CountUp from 'react-countup';
-import Zoom from 'react-reveal-effects/Zoom';
 import Wave from 'react-wavify'
 import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig'
 
@@ -140,12 +139,10 @@ function Dashboard() {
             <h1 className='update'>Here's an update for today</h1>
         </div>
         <div className="card-container">
-    <Zoom>
             <Card redir={users} label="Users" data={allUsers.length} type="users" design="cards card-1"icon={user} />
             <Card  redir={covidreport}label="Communicable disease report" data={allCommunicableDisease.length} type="communicable-disease" design="secondary-cards card-2" icon={covid}/>
             <Card redir={emergency}label="Emergency reports" data={allEmergencyReports.length} type="emergency-reports" design="secondary-cards card-3" icon={phone}/>
             <Card redir={attendance}label="Attendance" data="See all" type="attendance" design="secondary-cards card-4" icon={note}/>
-    </Zoom>
             <div className="analytics">
               <p className="covid-update">Covid Update Philippines</p>
               <div className="covid-details">
