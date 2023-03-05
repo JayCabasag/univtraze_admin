@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import Breadcrumbs from '../components/Breadcrumbs'
 import Header from '../components/Header'
-import back from '../assets/back-icon.png'
 import { useNavigate} from "react-router-dom"
 import next from '../assets/next-icon.png';
-import {covidData} from "../data/covidReportData.js";
 import axios from 'axios'
 import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig'
 
