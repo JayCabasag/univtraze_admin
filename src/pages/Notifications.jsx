@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../components/Header'
-import back from '../assets/back-icon.png'
 import { useNavigate} from "react-router-dom"
 import Breadcrumbs from '../components/Breadcrumbs'
 import axios from 'axios'
@@ -11,7 +10,6 @@ import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig'
 function Notifications() {
 
     const [currentPageNumber, setCurrentPageNumber] = useState(1)
-    const [pageLimit, setPageLimit] = useState(25)
     const [notificationLists, setNotificationLists] = useState([])
 
     useEffect(() => {

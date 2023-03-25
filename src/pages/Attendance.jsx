@@ -1,6 +1,5 @@
 import React from 'react'
 import Header from '../components/Header'
-import back from '../assets/back-icon.png'
 import Breadcrumbs from '../components/Breadcrumbs'
 import { useNavigate} from "react-router-dom"
 import { useEffect, useState } from 'react'
@@ -14,36 +13,34 @@ const Attendance = () => {
     const [allRooms, setAllRooms] = useState([])
 
     useEffect(() => {
-      handleGetAllRooms()
-    }, [])
-
-    const handleGetAllRooms = async () => {
+        const handleGetAllRooms = async () => {
         
-        const token = localStorage.getItem('token');
-
-        const headers = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-        };
-
-        await axios
-        .get(
-            `${CURRENT_SERVER_DOMAIN}/rooms/allRooms`,
-            {
-            headers: headers,
-            }
-        ).then(resp => {
-            setAllRooms(resp.data.data);
-        });
-    }
+            const token = localStorage.getItem('token');
     
+            const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+            };
+    
+            await axios
+            .get(
+                `${CURRENT_SERVER_DOMAIN}/rooms/allRooms`,
+                {
+                headers: headers,
+                }
+            ).then(resp => {
+                setAllRooms(resp?.data?.data);
+            });
+        }
+        handleGetAllRooms()
+    }, [])
 
     const admin = () => {
         navigate('/admin')
     }
 
-    const attendance = (room_id, room_number, building_name) => {
-        navigate(`/admin/attendance-room/${room_id}&${room_number}&${building_name}`)
+    const attendance = (room_id) => {
+        navigate(`/admin/attendance-room/${room_id}`)
     }
 
   return (
@@ -58,11 +55,11 @@ const Attendance = () => {
 
                 {
                     allRooms.map((room) => {
-                        return   <div className="room" onClick={() => {attendance(room.room_id, room.room_number, room.building_name)}}>
-                                    <p className="room__title">{room.room_number}</p>
-                                    <p className="room__section">{room.room_name}</p>
+                        return   <div className="room" onClick={() => {attendance(room?.room_id ?? '')}}>
+                                    <p className="room__title">{room?.room_number ?? ''}</p>
+                                    <p className="room__section">{room?.room_name ?? ''}</p>
                                     <p className="room__content">{
-                                        room.totalUserVisited
+                                        room?.totalUserVisited ?? ''
                                     } scanned this room</p>
                                 </div> 
                     })

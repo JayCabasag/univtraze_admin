@@ -1,6 +1,6 @@
 import './App.css';
 import './Styles/main.css'
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import User from './pages/User';
@@ -42,7 +42,7 @@ function App() {
           <Route path='/admin/add-clinic-admin' element={<AddClinicAdmin/>} />
           <Route path='/admin/account-settings' element={<AccountSettings/>} />
           <Route path='/admin/view-room' element={<ViewRoom/>} />
-          <Route path='/admin/attendance-room/:roomId&:roomNumber&:buildingName' element={<AttendanceRoom/>} />
+          <Route path='/admin/attendance-room/:roomId' element={<AttendanceRoom/>} />
           <Route path='/admin/communicable-disease-overview/:userId/:caseId/:userType' element={<CovidOverview/>} />
         </Routes>
       </Router>

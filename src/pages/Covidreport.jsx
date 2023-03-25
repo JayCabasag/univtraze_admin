@@ -75,15 +75,12 @@ function Covidreport() {
 
         const token = localStorage.getItem('token');
 
-        var data = {
-                user_id: user_id
-		}
 		const headers = {
 			'Content-Type': 'application/json',
 			'Authorization': `Bearer ${token}`
 		  }
 
-		  axios.post(`${CURRENT_SERVER_DOMAIN}/api/rooms/userVisitedRooms`, data, {
+		  axios.get(`${CURRENT_SERVER_DOMAIN}/rooms/visited-rooms/${user_id}`, {
 			  headers: headers
 			}).then(resp => {
             

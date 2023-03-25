@@ -11,10 +11,6 @@ import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig';
 function ViewRoom() {
   const [allRooms, setAllRooms] = useState([]);
 
-  useEffect(() => {
-    getAllRooms();
-  }, []);
-
   const getAllRooms = async () => {
     const token = localStorage.getItem('token');
 
@@ -44,6 +40,10 @@ function ViewRoom() {
       });
   };
 
+  useEffect(() => {
+    getAllRooms();
+  }, []);
+  
   const navigate = useNavigate();
 
   const admin = () => {

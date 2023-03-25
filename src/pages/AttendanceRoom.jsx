@@ -1,25 +1,63 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../components/Header'
-import back from '../assets/back-icon.png'
 import { useNavigate, useParams} from "react-router-dom"
 import Breadcrumbs from '../components/Breadcrumbs'
 import axios from 'axios'
-import { jsPDF } from "jspdf";
 import GeneratePdf from '../components/GeneratePdf'
 import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig'
 
 const AttendanceRoom = () => {
     
-    const {roomId, roomNumber, buildingName} = useParams()
-
+    const { roomId } = useParams()
     const [userVisitedLists, setUserVisitedLists] = useState([])
-
     const navigate = useNavigate()
-
     const [isLoading, setIsLoading] = useState(false)
-
     const [showPdfPreviewer, setShowPdfPreviewer] = useState(false)
+    const [allRooms, setAllRooms] = useState([])
+    const [noResultsFound, setNoResultsFound] = useState(false)
 
+    const getAllRooms = async () => {
+        const token = localStorage.getItem('token');
+    
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        };
+    
+        await axios
+          .get(`${CURRENT_SERVER_DOMAIN}/rooms/allRooms`, {
+            headers: headers,
+          })
+          .then((response) => {
+            var returnArr = [];
+            returnArr.push(response.data.data);
+            setAllRooms(returnArr[0]);
+    
+            if (returnArr[0].length === 0) {
+              setNoResultsFound(true);
+            } else {
+              setNoResultsFound(false);
+            }
+          })
+    
+          .catch((error) => {
+            console.log('Error ' + error);
+          });
+      };
+    
+    useEffect(() => {
+      getAllRooms();
+    }, []);
+    
+    const currentRoom = allRooms?.find((currentRoom) => {
+        const currentRoomId = currentRoom?.room_id ?? ''
+        const isSameRoomId =  `${currentRoomId}` === roomId
+        return isSameRoomId
+    })
+
+    const currentBuildingName = currentRoom?.building_name ?? ''
+    const roomNumber = currentRoom?.room_number ?? ''
+    
     const admin = () => {
         navigate(`/admin/attendance`)
     }
@@ -27,8 +65,6 @@ const AttendanceRoom = () => {
     useEffect(() => {
       getRoomVisitors(roomId * 1)
     }, [])
-
-
     const getRoomVisitors = async (room_id) => {
       setIsLoading(true)
       const token = localStorage.getItem('token');
@@ -41,12 +77,10 @@ const AttendanceRoom = () => {
       await axios.post(`${CURRENT_SERVER_DOMAIN}/rooms/searchUsersByRoomId`, {room_id}, {
           headers: headers
         }).then(resp => {
-            
             setIsLoading(false)
-            if(resp.data.success === 0){
+            if(resp?.data?.success === 0){
                 return alert('An error occured')
             }
-
             if(resp.data.success === 1){
                return setUserVisitedLists(resp.data.data)
             } 
@@ -71,7 +105,7 @@ const AttendanceRoom = () => {
     <div className='users'>
         {
             showPdfPreviewer?
-            <GeneratePdf closePreviewer={closePreviewer} props={{roomId, roomNumber, buildingName}}/>
+            <GeneratePdf closePreviewer={closePreviewer} props={{roomId, roomNumber, buildingName: currentBuildingName}}/>
             :
             null
         }
@@ -79,8 +113,10 @@ const AttendanceRoom = () => {
     <div className="container" id="dataContainer">
     <Breadcrumbs event={admin} identifier="Dashboard / " current="Room"/>
        <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-       <p className="user-title">Users visited in {buildingName} - Room : {roomNumber} </p>
-       <button style={{backgroundColor: '#28cd41', color: 'white', padding: '1rem 2rem', borderRadius: '1rem', fontWeight: 'bold'}} onClick={() => {handleGeneratePDFReport(roomId, roomNumber, buildingName)}}>Generate PDF</button>
+       <p className="user-title">Users visited in {currentBuildingName} - Room : {roomNumber} </p>
+       <button
+         style={{backgroundColor: '#28cd41', color: 'white', padding: '1rem 2rem', borderRadius: '1rem', fontWeight: 'bold'}}
+         onClick={() => {handleGeneratePDFReport(roomId, roomNumber, currentBuildingName)}}>Generate PDF</button>
        </div>
         {   
             isLoading?

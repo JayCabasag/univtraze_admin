@@ -27,21 +27,17 @@ function Dashboard() {
   const [allEmergencyReports, setAllEmergencyReports] = useState([])
 
   useEffect(() => {
-    setInterval(() => {
-      GetCovidData();
-    }, 10000);
+      const GetCovidData = async () => {
+        await axios.get('https://disease.sh/v3/covid-19/countries/PH?strict=true').then(resp => {
+          const data = resp.data;
+    
+          setLocalCases(data.cases)
+          setDeaths(data.deaths)
+          setRecovered(data.recovered)
+      });
+      }
+     GetCovidData();
   }, [])
-
-
-  const GetCovidData = async () => {
-    await axios.get('https://disease.sh/v3/covid-19/countries/PH?strict=true').then(resp => {
-      const data = resp.data;
-
-      setLocalCases(data.cases)
-      setDeaths(data.deaths)
-      setRecovered(data.recovered)
-  });
-  }
 
 
   useEffect(() => {

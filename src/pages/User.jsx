@@ -6,7 +6,7 @@ import axios from 'axios'
 import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig'
 
 
-function User({users}) {
+function User() {
 
     const [allUsers, setAllUsers] = useState([])
 

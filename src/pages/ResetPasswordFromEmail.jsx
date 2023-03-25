@@ -2,36 +2,22 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../App.css';
 import logoDark from '../assets/logo-dark.png';
-import Button from '../components/Button';
 import axios from 'axios';
-import Spinner from 'react-loading-spin';
 import validator from 'validator';
 import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig';
 
 const ResetPasswordFromEmail = () => {
-
   const {recovery_email, recovery_password} = useParams()
-
   const navigate = useNavigate();
-
-  const [email, setEmail] = useState('');
-
   const [pwd, setPwd] = useState('');
   const [isPwd, setIsPwd] = useState(true);
-
   const [confirmPassword, setConfirmPassword] = useState('')
   const [isConfirmPassword, setIsConfirmPassword] = useState(true)
-
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setsuccessMessage] = useState();
-
   const [isLoading, setIsLoading] = useState(false);
-
-  const redir = () => {
-    navigate('/admin');
-  };
 
   const handleResetPassword = async () => {
     if(validator.isEmpty(pwd)){

@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import logoDark from '../assets/logo-dark.png';
-import Button from '../components/Button';
 import axios from 'axios';
-import Spinner from 'react-loading-spin';
 import validator from 'validator'
 import { CURRENT_SERVER_DOMAIN } from '../services/serverConfig';
 
